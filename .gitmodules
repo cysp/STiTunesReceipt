@@ -1,0 +1,4 @@
+[submodule "lib/STASN1der"]
+	path = lib/STASN1der
+	url = git://github.com/cysp/STASN1der.git
+	branch = master

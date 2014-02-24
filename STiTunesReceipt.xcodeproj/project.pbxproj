@@ -1,0 +1,601 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2CD9B51E18BB594400EA8AA1 /* libSTASN1der.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9B51918BB592F00EA8AA1 /* libSTASN1der.a */; };
+		2CD9B56118BB919B00EA8AA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9B56018BB919B00EA8AA1 /* Foundation.framework */; };
+		2CD9B58A18BB91E700EA8AA1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9B58918BB91E700EA8AA1 /* Cocoa.framework */; };
+		2CD9B5AF18BB927900EA8AA1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B5AE18BB927900EA8AA1 /* main.m */; };
+		2CD9B5B018BB94B800EA8AA1 /* STiTunesAppReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B52B18BB6A7D00EA8AA1 /* STiTunesAppReceipt.m */; };
+		2CD9B5B118BB94B800EA8AA1 /* STiTunesInAppReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B52E18BB81A200EA8AA1 /* STiTunesInAppReceipt.m */; };
+		2CD9B5B218BB94B800EA8AA1 /* STiTunesReceiptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B52518BB68D200EA8AA1 /* STiTunesReceiptParser.m */; };
+		2CD9B5B318BB94B800EA8AA1 /* STiTunesAppReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B52B18BB6A7D00EA8AA1 /* STiTunesAppReceipt.m */; };
+		2CD9B5B418BB94B800EA8AA1 /* STiTunesInAppReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B52E18BB81A200EA8AA1 /* STiTunesInAppReceipt.m */; };
+		2CD9B5B518BB94B800EA8AA1 /* STiTunesReceiptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B52518BB68D200EA8AA1 /* STiTunesReceiptParser.m */; };
+		2CD9B5B618BB94C400EA8AA1 /* libSTiTunesReceipt-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9B58818BB91E600EA8AA1 /* libSTiTunesReceipt-mac.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2CD9B51418BB592F00EA8AA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2CD9B50D18BB592F00EA8AA1 /* STASN1der.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2C24D3B117676FFF0005B30C;
+			remoteInfo = "STASN1der-iOS";
+		};
+		2CD9B51618BB592F00EA8AA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2CD9B50D18BB592F00EA8AA1 /* STASN1der.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2C24D3C1176770000005B30C;
+			remoteInfo = "STASN1derTests-iOS";
+		};
+		2CD9B51818BB592F00EA8AA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2CD9B50D18BB592F00EA8AA1 /* STASN1der.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2C24D44E176B10A90005B30C;
+			remoteInfo = "STASN1der-mac";
+		};
+		2CD9B51A18BB592F00EA8AA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2CD9B50D18BB592F00EA8AA1 /* STASN1der.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2C24D45F176B10A90005B30C;
+			remoteInfo = "STASN1derTests-mac";
+		};
+		2CD9B51C18BB594000EA8AA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2CD9B50D18BB592F00EA8AA1 /* STASN1der.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C24D44D176B10A90005B30C;
+			remoteInfo = "STASN1der-mac";
+		};
+		2CD9B5B718BB94C800EA8AA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2CD9B4F318BB57ED00EA8AA1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2CD9B58718BB91E600EA8AA1;
+			remoteInfo = "STiTunesReceipt-mac";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2CD9B4F918BB57ED00EA8AA1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		2CD9B55C18BB919B00EA8AA1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2CD9B4FB18BB57ED00EA8AA1 /* STiTunesReceipt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = STiTunesReceipt; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CD9B50D18BB592F00EA8AA1 /* STASN1der.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = STASN1der.xcodeproj; path = STASN1der/STASN1der.xcodeproj; sourceTree = "<group>"; };
+		2CD9B52418BB68D200EA8AA1 /* STiTunesReceiptParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STiTunesReceiptParser.h; sourceTree = "<group>"; };
+		2CD9B52518BB68D200EA8AA1 /* STiTunesReceiptParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STiTunesReceiptParser.m; sourceTree = "<group>"; };
+		2CD9B52A18BB6A7D00EA8AA1 /* STiTunesAppReceipt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STiTunesAppReceipt.h; sourceTree = "<group>"; };
+		2CD9B52B18BB6A7D00EA8AA1 /* STiTunesAppReceipt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STiTunesAppReceipt.m; sourceTree = "<group>"; };
+		2CD9B52D18BB81A200EA8AA1 /* STiTunesInAppReceipt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STiTunesInAppReceipt.h; sourceTree = "<group>"; };
+		2CD9B52E18BB81A200EA8AA1 /* STiTunesInAppReceipt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STiTunesInAppReceipt.m; sourceTree = "<group>"; };
+		2CD9B55E18BB919B00EA8AA1 /* libSTiTunesReceipt-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libSTiTunesReceipt-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CD9B56018BB919B00EA8AA1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2CD9B56E18BB919B00EA8AA1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		2CD9B57118BB919B00EA8AA1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		2CD9B58818BB91E600EA8AA1 /* libSTiTunesReceipt-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libSTiTunesReceipt-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CD9B58918BB91E700EA8AA1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		2CD9B58C18BB91E700EA8AA1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2CD9B58D18BB91E700EA8AA1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2CD9B58E18BB91E700EA8AA1 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		2CD9B5AE18BB927900EA8AA1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2CD9B5B918BB979600EA8AA1 /* STiTunesReceiptParser+Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "STiTunesReceiptParser+Internal.h"; sourceTree = "<group>"; };
+		2CD9B5BA18BB97C400EA8AA1 /* STiTunesInAppReceipt+Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "STiTunesInAppReceipt+Internal.h"; sourceTree = "<group>"; };
+		2CD9B5BB18BB97E800EA8AA1 /* STiTunesAppReceipt+Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "STiTunesAppReceipt+Internal.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2CD9B4F818BB57ED00EA8AA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD9B5B618BB94C400EA8AA1 /* libSTiTunesReceipt-mac.a in Frameworks */,
+				2CD9B51E18BB594400EA8AA1 /* libSTASN1der.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD9B55B18BB919B00EA8AA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD9B56118BB919B00EA8AA1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD9B58518BB91E600EA8AA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD9B58A18BB91E700EA8AA1 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2CD9B4F218BB57ED00EA8AA1 = {
+			isa = PBXGroup;
+			children = (
+				2CD9B50018BB57ED00EA8AA1 /* STiTunesReceipt */,
+				2CD9B5AD18BB920A00EA8AA1 /* STiTunesReceiptChecker */,
+				2CD9B50C18BB582C00EA8AA1 /* lib */,
+				2CD9B55F18BB919B00EA8AA1 /* Frameworks */,
+				2CD9B4FC18BB57ED00EA8AA1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2CD9B4FC18BB57ED00EA8AA1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2CD9B4FB18BB57ED00EA8AA1 /* STiTunesReceipt */,
+				2CD9B55E18BB919B00EA8AA1 /* libSTiTunesReceipt-iOS.a */,
+				2CD9B58818BB91E600EA8AA1 /* libSTiTunesReceipt-mac.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CD9B50018BB57ED00EA8AA1 /* STiTunesReceipt */ = {
+			isa = PBXGroup;
+			children = (
+				2CD9B52A18BB6A7D00EA8AA1 /* STiTunesAppReceipt.h */,
+				2CD9B5BB18BB97E800EA8AA1 /* STiTunesAppReceipt+Internal.h */,
+				2CD9B52B18BB6A7D00EA8AA1 /* STiTunesAppReceipt.m */,
+				2CD9B52D18BB81A200EA8AA1 /* STiTunesInAppReceipt.h */,
+				2CD9B5BA18BB97C400EA8AA1 /* STiTunesInAppReceipt+Internal.h */,
+				2CD9B52E18BB81A200EA8AA1 /* STiTunesInAppReceipt.m */,
+				2CD9B52418BB68D200EA8AA1 /* STiTunesReceiptParser.h */,
+				2CD9B5B918BB979600EA8AA1 /* STiTunesReceiptParser+Internal.h */,
+				2CD9B52518BB68D200EA8AA1 /* STiTunesReceiptParser.m */,
+			);
+			path = STiTunesReceipt;
+			sourceTree = "<group>";
+		};
+		2CD9B50C18BB582C00EA8AA1 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				2CD9B50D18BB592F00EA8AA1 /* STASN1der.xcodeproj */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		2CD9B50E18BB592F00EA8AA1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2CD9B51518BB592F00EA8AA1 /* libSTASN1der.a */,
+				2CD9B51718BB592F00EA8AA1 /* STASN1derTests.xctest */,
+				2CD9B51918BB592F00EA8AA1 /* libSTASN1der.a */,
+				2CD9B51B18BB592F00EA8AA1 /* STASN1derTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2CD9B55F18BB919B00EA8AA1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2CD9B56018BB919B00EA8AA1 /* Foundation.framework */,
+				2CD9B56E18BB919B00EA8AA1 /* XCTest.framework */,
+				2CD9B57118BB919B00EA8AA1 /* UIKit.framework */,
+				2CD9B58918BB91E700EA8AA1 /* Cocoa.framework */,
+				2CD9B58B18BB91E700EA8AA1 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2CD9B58B18BB91E700EA8AA1 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2CD9B58C18BB91E700EA8AA1 /* Foundation.framework */,
+				2CD9B58D18BB91E700EA8AA1 /* CoreData.framework */,
+				2CD9B58E18BB91E700EA8AA1 /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		2CD9B5AD18BB920A00EA8AA1 /* STiTunesReceiptChecker */ = {
+			isa = PBXGroup;
+			children = (
+				2CD9B5AE18BB927900EA8AA1 /* main.m */,
+			);
+			path = STiTunesReceiptChecker;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		2CD9B58618BB91E600EA8AA1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		2CD9B4FA18BB57ED00EA8AA1 /* STiTunesReceiptChecker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2CD9B50918BB57ED00EA8AA1 /* Build configuration list for PBXNativeTarget "STiTunesReceiptChecker" */;
+			buildPhases = (
+				2CD9B4F718BB57ED00EA8AA1 /* Sources */,
+				2CD9B4F818BB57ED00EA8AA1 /* Frameworks */,
+				2CD9B4F918BB57ED00EA8AA1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2CD9B5B818BB94C800EA8AA1 /* PBXTargetDependency */,
+				2CD9B51D18BB594000EA8AA1 /* PBXTargetDependency */,
+			);
+			name = STiTunesReceiptChecker;
+			productName = STiTunesReceiptValidator;
+			productReference = 2CD9B4FB18BB57ED00EA8AA1 /* STiTunesReceipt */;
+			productType = "com.apple.product-type.tool";
+		};
+		2CD9B55D18BB919B00EA8AA1 /* STiTunesReceipt-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2CD9B57E18BB919B00EA8AA1 /* Build configuration list for PBXNativeTarget "STiTunesReceipt-iOS" */;
+			buildPhases = (
+				2CD9B55A18BB919B00EA8AA1 /* Sources */,
+				2CD9B55B18BB919B00EA8AA1 /* Frameworks */,
+				2CD9B55C18BB919B00EA8AA1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "STiTunesReceipt-iOS";
+			productName = "STiTunesReceipt-iOS";
+			productReference = 2CD9B55E18BB919B00EA8AA1 /* libSTiTunesReceipt-iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		2CD9B58718BB91E600EA8AA1 /* STiTunesReceipt-mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2CD9B5A718BB91E700EA8AA1 /* Build configuration list for PBXNativeTarget "STiTunesReceipt-mac" */;
+			buildPhases = (
+				2CD9B58418BB91E600EA8AA1 /* Sources */,
+				2CD9B58518BB91E600EA8AA1 /* Frameworks */,
+				2CD9B58618BB91E600EA8AA1 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "STiTunesReceipt-mac";
+			productName = "STiTunesReceipt-mac";
+			productReference = 2CD9B58818BB91E600EA8AA1 /* libSTiTunesReceipt-mac.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2CD9B4F318BB57ED00EA8AA1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Scott Talbot";
+			};
+			buildConfigurationList = 2CD9B4F618BB57ED00EA8AA1 /* Build configuration list for PBXProject "STiTunesReceipt" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2CD9B4F218BB57ED00EA8AA1;
+			productRefGroup = 2CD9B4FC18BB57ED00EA8AA1 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 2CD9B50E18BB592F00EA8AA1 /* Products */;
+					ProjectRef = 2CD9B50D18BB592F00EA8AA1 /* STASN1der.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				2CD9B4FA18BB57ED00EA8AA1 /* STiTunesReceiptChecker */,
+				2CD9B55D18BB919B00EA8AA1 /* STiTunesReceipt-iOS */,
+				2CD9B58718BB91E600EA8AA1 /* STiTunesReceipt-mac */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		2CD9B51518BB592F00EA8AA1 /* libSTASN1der.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSTASN1der.a;
+			remoteRef = 2CD9B51418BB592F00EA8AA1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2CD9B51718BB592F00EA8AA1 /* STASN1derTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = STASN1derTests.xctest;
+			remoteRef = 2CD9B51618BB592F00EA8AA1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2CD9B51918BB592F00EA8AA1 /* libSTASN1der.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSTASN1der.a;
+			remoteRef = 2CD9B51818BB592F00EA8AA1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2CD9B51B18BB592F00EA8AA1 /* STASN1derTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = folder;
+			path = STASN1derTests.xctest;
+			remoteRef = 2CD9B51A18BB592F00EA8AA1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2CD9B4F718BB57ED00EA8AA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD9B5AF18BB927900EA8AA1 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD9B55A18BB919B00EA8AA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD9B5B418BB94B800EA8AA1 /* STiTunesInAppReceipt.m in Sources */,
+				2CD9B5B518BB94B800EA8AA1 /* STiTunesReceiptParser.m in Sources */,
+				2CD9B5B318BB94B800EA8AA1 /* STiTunesAppReceipt.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD9B58418BB91E600EA8AA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD9B5B118BB94B800EA8AA1 /* STiTunesInAppReceipt.m in Sources */,
+				2CD9B5B218BB94B800EA8AA1 /* STiTunesReceiptParser.m in Sources */,
+				2CD9B5B018BB94B800EA8AA1 /* STiTunesAppReceipt.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2CD9B51D18BB594000EA8AA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "STASN1der-mac";
+			targetProxy = 2CD9B51C18BB594000EA8AA1 /* PBXContainerItemProxy */;
+		};
+		2CD9B5B818BB94C800EA8AA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2CD9B58718BB91E600EA8AA1 /* STiTunesReceipt-mac */;
+			targetProxy = 2CD9B5B718BB94C800EA8AA1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2CD9B50718BB57ED00EA8AA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		2CD9B50818BB57ED00EA8AA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		2CD9B50A18BB57ED00EA8AA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/STiTunesReceipt",
+					"$(SRCROOT)/lib/STASN1der",
+				);
+				PRODUCT_NAME = STiTunesReceipt;
+			};
+			name = Debug;
+		};
+		2CD9B50B18BB57ED00EA8AA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/STiTunesReceipt",
+					"$(SRCROOT)/lib/STASN1der",
+				);
+				PRODUCT_NAME = STiTunesReceipt;
+			};
+			name = Release;
+		};
+		2CD9B57F18BB919B00EA8AA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/STiTunesReceipt_iOS.dst;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/lib/STASN1der",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		2CD9B58018BB919B00EA8AA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/STiTunesReceipt_iOS.dst;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/lib/STASN1der",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2CD9B5A818BB91E700EA8AA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/lib/STASN1der",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		2CD9B5A918BB91E700EA8AA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/lib/STASN1der",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2CD9B4F618BB57ED00EA8AA1 /* Build configuration list for PBXProject "STiTunesReceipt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CD9B50718BB57ED00EA8AA1 /* Debug */,
+				2CD9B50818BB57ED00EA8AA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2CD9B50918BB57ED00EA8AA1 /* Build configuration list for PBXNativeTarget "STiTunesReceiptChecker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CD9B50A18BB57ED00EA8AA1 /* Debug */,
+				2CD9B50B18BB57ED00EA8AA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2CD9B57E18BB919B00EA8AA1 /* Build configuration list for PBXNativeTarget "STiTunesReceipt-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CD9B57F18BB919B00EA8AA1 /* Debug */,
+				2CD9B58018BB919B00EA8AA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2CD9B5A718BB91E700EA8AA1 /* Build configuration list for PBXNativeTarget "STiTunesReceipt-mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CD9B5A818BB91E700EA8AA1 /* Debug */,
+				2CD9B5A918BB91E700EA8AA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2CD9B4F318BB57ED00EA8AA1 /* Project object */;
+}
