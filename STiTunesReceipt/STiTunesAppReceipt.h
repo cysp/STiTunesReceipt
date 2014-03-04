@@ -7,8 +7,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class STASN1derSetObject;
+
 
 @interface STiTunesAppReceipt : NSObject
+- (id)initWithASN1Set:(STASN1derSetObject *)set;
 @property (nonatomic,copy,readonly) NSString *bundleId;
 @property (nonatomic,copy,readonly) NSString *applicationVersion;
 @property (nonatomic,copy,readonly) NSString *originalApplicationVersion;

@@ -13,4 +13,5 @@
 
 @interface STiTunesReceiptParser : NSObject
 + (STiTunesAppReceipt *)receiptWithData:(NSData *)data error:(NSError * __autoreleasing *)error;
++ (STiTunesAppReceipt *)receiptWithUnsignedData:(NSData *)data error:(NSError * __autoreleasing *)error;
 @end

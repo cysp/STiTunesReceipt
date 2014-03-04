@@ -19,7 +19,7 @@ typedef NS_ENUM(NSUInteger, STiTunesInAppReceiptValueType) {
     STiTunesInAppReceiptValueTypeOriginalTransactionIdentifier = 1705,
     STiTunesInAppReceiptValueTypeOriginalPurchaseDate = 1706,
     STiTunesInAppReceiptValueTypeExpiresDate = 1708,
-    STiTunesInAppReceiptValueTypeWebOrderItemID = 1711,
+    STiTunesInAppReceiptValueTypeWebOrderLineItemID = 1711,
     STiTunesInAppReceiptValueTypeCancellationDate = 1712,
 };
 
@@ -27,10 +27,10 @@ typedef NS_ENUM(NSUInteger, STiTunesInAppReceiptValueType) {
 @implementation STiTunesInAppReceipt
 
 - (id)init {
-    return [self initWithInAppPurchaseReceiptFields:nil];
+    return [self initWithASN1Set:nil];
 }
 
-- (id)initWithInAppPurchaseReceiptFields:(NSSet *)fields {
+- (id)initWithASN1Set:(STASN1derSetObject *)set {
     NSUInteger quantity = 0;
     NSString *productId = nil;
     NSString *transactionId = nil;
@@ -41,46 +41,72 @@ typedef NS_ENUM(NSUInteger, STiTunesInAppReceiptValueType) {
     NSUInteger webOrderLineItemID = 0;
     NSDate *cancellationDate = nil;
 
-    for (NSArray *field in fields) {
-        NSNumber * const type = [field objectAtIndex:0];
-        NSNumber * const version = [field objectAtIndex:1];
-        if (version.unsignedIntegerValue != 1) {
+    NSMutableIndexSet * const fieldTypesSeen = [[NSMutableIndexSet alloc] init];
+    for (STASN1derSequenceObject *fieldSequence in set.value) {
+        if (![fieldSequence isKindOfClass:[STASN1derSequenceObject class]]) {
             return nil;
         }
-        NSData * const value = [field objectAtIndex:2];
-        switch ((STiTunesInAppReceiptValueType)type.unsignedIntegerValue) {
+        if (fieldSequence.count != 3) {
+            return nil;
+        }
+        STASN1derIntegerObject * const type = fieldSequence[0];
+        if (![type isKindOfClass:[STASN1derIntegerObject class]]) {
+            return nil;
+        }
+        STASN1derIntegerObject * const version = fieldSequence[1];
+        if (![version isKindOfClass:[STASN1derIntegerObject class]]) {
+            return nil;
+        }
+        if (version.value != 1) {
+            return nil;
+        }
+        STASN1derOctetStringObject * const value = fieldSequence[2];
+        if (![value isKindOfClass:[STASN1derOctetStringObject class]]) {
+            return nil;
+        }
+        NSData * const fieldValueData = value.value;
+
+        if ([fieldTypesSeen containsIndex:type.value]) {
+            return nil;
+        }
+        [fieldTypesSeen addIndex:type.value];
+
+        switch ((STiTunesInAppReceiptValueType)type.value) {
             case STiTunesInAppReceiptValueTypeQuantity: {
-                NSNumber * const quantityNumber = [STASN1derParser objectFromASN1Data:value error:NULL];
-                quantity = quantityNumber.unsignedIntegerValue;
+                STASN1derIntegerObject * const quantityIntegerObject = [STASN1derParser objectFromASN1Data:fieldValueData error:NULL];
+                quantity = quantityIntegerObject.value;
             } break;
             case STiTunesInAppReceiptValueTypeProductIdentifier: {
-                productId = [STASN1derParser objectFromASN1Data:value error:NULL];
+                STASN1derUTF8StringObject * const productIdStringObject = [STASN1derParser objectFromASN1Data:fieldValueData error:NULL];
+                productId = productIdStringObject.value;
             } break;
             case STiTunesInAppReceiptValueTypeTransactionIdentifier: {
-                transactionId = [STASN1derParser objectFromASN1Data:value error:NULL];
+                STASN1derUTF8StringObject * const transactionIdStringObject = [STASN1derParser objectFromASN1Data:fieldValueData error:NULL];
+                transactionId = transactionIdStringObject.value;
             } break;
             case STiTunesInAppReceiptValueTypePurchaseDate: {
-                NSString * const dateString = [STASN1derParser objectFromASN1Data:value error:NULL];
-                purchaseDate = [STiTunesReceiptParser st_dateForString:dateString];
+                STASN1derIA5StringObject * const purchaseDateStringObject = [STASN1derParser objectFromASN1Data:fieldValueData error:NULL];
+                purchaseDate = [STiTunesReceiptParser st_dateForString:purchaseDateStringObject.value];
             } break;
             case STiTunesInAppReceiptValueTypeOriginalTransactionIdentifier: {
-                originalTransactionId = [STASN1derParser objectFromASN1Data:value error:NULL];
+                STASN1derUTF8StringObject * const originalTransactionIdStringObject = [STASN1derParser objectFromASN1Data:fieldValueData error:NULL];
+                originalTransactionId = originalTransactionIdStringObject.value;
             } break;
             case STiTunesInAppReceiptValueTypeOriginalPurchaseDate: {
-                NSString * const dateString = [STASN1derParser objectFromASN1Data:value error:NULL];
-                originalPurchaseDate = [STiTunesReceiptParser st_dateForString:dateString];
+                STASN1derIA5StringObject * const originalPurchaseDateStringObject = [STASN1derParser objectFromASN1Data:fieldValueData error:NULL];
+                originalPurchaseDate = [STiTunesReceiptParser st_dateForString:originalPurchaseDateStringObject.value];
             } break;
             case STiTunesInAppReceiptValueTypeExpiresDate: {
-                NSString * const dateString = [STASN1derParser objectFromASN1Data:value error:NULL];
-                expiresDate = [STiTunesReceiptParser st_dateForString:dateString];
+                STASN1derIA5StringObject * const expiresDateStringObject = [STASN1derParser objectFromASN1Data:fieldValueData error:NULL];
+                expiresDate = [STiTunesReceiptParser st_dateForString:expiresDateStringObject.value];
             } break;
-            case STiTunesInAppReceiptValueTypeWebOrderItemID: {
-                NSNumber * const webOrderItemIDNumber = [STASN1derParser objectFromASN1Data:value error:NULL];
-                webOrderLineItemID = webOrderItemIDNumber.unsignedIntegerValue;
+            case STiTunesInAppReceiptValueTypeWebOrderLineItemID: {
+                STASN1derIntegerObject * const webOrderLineItemIdIntegerObject = [STASN1derParser objectFromASN1Data:fieldValueData error:NULL];
+                webOrderLineItemID = webOrderLineItemIdIntegerObject.value;
             } break;
             case STiTunesInAppReceiptValueTypeCancellationDate: {
-                NSString * const dateString = [STASN1derParser objectFromASN1Data:value error:NULL];
-                cancellationDate = [STiTunesReceiptParser st_dateForString:dateString];
+                STASN1derIA5StringObject * const cancellationDateStringObject = [STASN1derParser objectFromASN1Data:fieldValueData error:NULL];
+                cancellationDate = [STiTunesReceiptParser st_dateForString:cancellationDateStringObject.value];
             } break;
         }
     }

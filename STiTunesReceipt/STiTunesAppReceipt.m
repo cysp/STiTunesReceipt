@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Scott Talbot. All rights reserved.
 
 #import "STiTunesAppReceipt.h"
-#import "STiTunesInAppReceipt+Internal.h"
 #import "STiTunesReceiptParser+Internal.h"
 
 #import <STASN1der/STASN1der.h>
@@ -26,53 +25,71 @@ typedef NS_ENUM(NSUInteger, STiTunesReceiptValueType) {
 @implementation STiTunesAppReceipt
 
 - (id)init {
-    return [self initWithAppReceiptFields:nil];
+    return [self initWithASN1Set:nil];
 }
 
-- (id)initWithAppReceiptFields:(NSSet *)fields {
+- (id)initWithASN1Set:(STASN1derSetObject *)set {
     NSString *bundleId = nil;
     NSString *applicationVersion = nil;
     NSString *originalApplicationVersion = nil;
     NSDate *expirationDate = nil;
+
     NSMutableArray * const inApp = [[NSMutableArray alloc] init];
-    for (NSArray *receiptAttribute in fields) {
-        NSNumber * const type = [receiptAttribute objectAtIndex:0];
-//        NSNumber * const version = [inAppAttribute objectAtIndex:1];
-//        if (version.unsignedIntegerValue != 1) {
+
+    for (STASN1derSequenceObject *receiptAttribute in set.value) {
+        if (receiptAttribute.count != 3) {
+            return nil;
+        }
+        STASN1derIntegerObject * const type = receiptAttribute[0];
+        if (![type isKindOfClass:[STASN1derIntegerObject class]]) {
+            return nil;
+        }
+        STASN1derIntegerObject * const version = receiptAttribute[1];
+        if (![version isKindOfClass:[STASN1derIntegerObject class]]) {
+            return nil;
+        }
+//        if (version.value != 1) {
 //            return nil;
 //        }
-        NSData * const value = [receiptAttribute objectAtIndex:2];
-        switch ((STiTunesReceiptValueType)type.unsignedIntegerValue) {
+        STASN1derOctetStringObject * const value = receiptAttribute[2];
+        if (![value isKindOfClass:[STASN1derOctetStringObject class]]) {
+            return nil;
+        }
+        NSData * const valueData = value.content;
+        switch ((STiTunesReceiptValueType)type.value) {
             case STiTunesReceiptValueTypeOpaqueValue:
-                NSLog(@"opaqueValue: %@", value);
+                NSLog(@"opaqueValue: %@", valueData);
                 break;
             case STiTunesReceiptValueTypeSHA1Hash:
-                NSLog(@"sha1Hash: %@", value);
+                NSLog(@"sha1Hash: %@", valueData);
                 break;
             case STiTunesReceiptValueTypeBundleId: {
-                id const valueObject = [STASN1derParser objectFromASN1Data:value error:NULL];
-                bundleId = valueObject;
+                STASN1derUTF8StringObject * const valueObject = [STASN1derParser objectFromASN1Data:valueData error:NULL];
+                bundleId = valueObject.value;
             } break;
             case STiTunesReceiptValueTypeApplicationVersion: {
-                id const valueObject = [STASN1derParser objectFromASN1Data:value error:NULL];
-                applicationVersion = valueObject;
+                STASN1derUTF8StringObject * const valueObject = [STASN1derParser objectFromASN1Data:valueData error:NULL];
+                applicationVersion = valueObject.value;
             } break;
             case STiTunesReceiptValueTypeOriginalApplicationVersion: {
-                id const valueObject = [STASN1derParser objectFromASN1Data:value error:NULL];
-                originalApplicationVersion = valueObject;
+                STASN1derUTF8StringObject * const valueObject = [STASN1derParser objectFromASN1Data:valueData error:NULL];
+                originalApplicationVersion = valueObject.value;
             } break;
             case STiTunesReceiptValueTypeExpirationDate: {
-                NSString * const dateString = [STASN1derParser objectFromASN1Data:value error:NULL];
-                expirationDate = [STiTunesReceiptParser st_dateForString:dateString];
+                STASN1derUTF8StringObject * const dateString = [STASN1derParser objectFromASN1Data:valueData error:NULL];
+                expirationDate = [STiTunesReceiptParser st_dateForString:dateString.value];
             } break;
             case STiTunesReceiptValueTypeInAppPurchaseReceipt: {
-                NSArray * const valueObjects = [STASN1derParser objectsFromASN1Data:value error:NULL];
+                NSArray * const valueObjects = [STASN1derParser objectsFromASN1Data:valueData error:NULL];
                 if (valueObjects.count != 1) {
                     return nil;
                 }
 
-                NSSet * const inAppReceiptFields = valueObjects.firstObject;
-                STiTunesInAppReceipt * const inAppReceipt = [[STiTunesInAppReceipt alloc] initWithInAppPurchaseReceiptFields:inAppReceiptFields];
+                STASN1derSetObject * const inAppReceiptSet = valueObjects.firstObject;
+                if (![inAppReceiptSet isKindOfClass:[STASN1derSetObject class]]) {
+                    return nil;
+                }
+                STiTunesInAppReceipt * const inAppReceipt = [[STiTunesInAppReceipt alloc] initWithASN1Set:inAppReceiptSet];
                 if (inAppReceipt) {
                     [inApp addObject:inAppReceipt];
                 }

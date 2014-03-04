@@ -7,8 +7,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class STASN1derSetObject;
+
 
 @interface STiTunesInAppReceipt : NSObject
+- (id)initWithASN1Set:(STASN1derSetObject *)set;
 @property (nonatomic,assign,readonly) NSUInteger quantity;
 @property (nonatomic,copy,readonly) NSString *productId;
 @property (nonatomic,copy,readonly) NSString *transactionId;
