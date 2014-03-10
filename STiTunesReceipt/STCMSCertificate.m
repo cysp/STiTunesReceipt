@@ -9,6 +9,9 @@
 #import "STCMSCertificate.h"
 #import "STCMS+Internal.h"
 
+#import "STCMSAlgorithmIdentifier.h"
+
+
 // RFC 5280 4.1.2
 //Certificate  ::=  SEQUENCE  {
 //    tbsCertificate       TBSCertificate,
@@ -60,28 +63,29 @@
 //    -- by extnID
 //}
 
-static struct STASN1derIdentifier const STCMSCertificateVersionIdentifier = {
+static struct STASN1derIdentifier const STTBSCertificateVersionIdentifier = {
     .class = STASN1derIdentifierClassContextSpecific,
     .constructed = NO,
     .tag = 0,
 };
-static struct STASN1derIdentifier const STCMSCertificateIssuerIdIdentifier = {
+static struct STASN1derIdentifier const STTBSCertificateIssuerIdIdentifier = {
     .class = STASN1derIdentifierClassContextSpecific,
     .constructed = NO,
     .tag = 1,
 };
-static struct STASN1derIdentifier const STCMSCertificateSubjectIdIdentifier = {
+static struct STASN1derIdentifier const STTBSCertificateSubjectIdIdentifier = {
     .class = STASN1derIdentifierClassContextSpecific,
     .constructed = NO,
     .tag = 2,
 };
-static struct STASN1derIdentifier const STCMSCertificateExtensionsIdentifier = {
+static struct STASN1derIdentifier const STTBSCertificateExtensionsIdentifier = {
     .class = STASN1derIdentifierClassContextSpecific,
     .constructed = YES,
     .tag = 3,
 };
 
-@implementation STCMSCertificate
+
+@implementation STTBSCertificate
 
 - (id)init { [self doesNotRecognizeSelector:_cmd]; return nil; }
 
@@ -98,7 +102,7 @@ static struct STASN1derIdentifier const STCMSCertificateExtensionsIdentifier = {
     NSUInteger version = 0;
     {
         STASN1derObject *object = sequence[i];
-        if (STASN1derIdentifierEqual(STCMSCertificateVersionIdentifier, object.identifier)) {
+        if (STASN1derIdentifierEqual(STTBSCertificateVersionIdentifier, object.identifier)) {
             STASN1derIntegerObject * const versionObject = STCMSEnsureClass(STASN1derIntegerObject, object);
             if (!versionObject) {
                 return nil;
@@ -112,7 +116,49 @@ static struct STASN1derIdentifier const STCMSCertificateExtensionsIdentifier = {
         STASN1derObject *object = sequence[i];
     }
     if ((self = [super init])) {
-        _data = sequence.content.copy;
+    }
+    return self;
+}
+
+@end
+
+
+@implementation STCMSCertificate
+
+- (id)init { [self doesNotRecognizeSelector:_cmd]; return nil; }
+
+- (id)initWithASN1Sequence:(STASN1derSequenceObject *)sequence {
+    if (![sequence isKindOfClass:[STASN1derSequenceObject class]]) {
+        return nil;
+    }
+    if (sequence.count != 3) {
+        return nil;
+    }
+
+
+    STASN1derSequenceObject * const certificateSequence = STCMSEnsureClass(STASN1derSequenceObject, sequence[0]);
+    if (!certificateSequence) {
+        return nil;
+    }
+
+    STASN1derSequenceObject * const algorithmSequence = STCMSEnsureClass(STASN1derSequenceObject, sequence[1]);
+    if (!algorithmSequence) {
+        return nil;
+    }
+
+    STASN1derBitStringObject * const signatureBitString = STCMSEnsureClass(STASN1derBitStringObject, sequence[2]);
+    if (!signatureBitString) {
+        return nil;
+    }
+
+    STTBSCertificate * const certificate = [[STTBSCertificate alloc] initWithASN1Sequence:certificateSequence];
+    STCMSAlgorithmIdentifier * const algorithm = [[STCMSAlgorithmIdentifier alloc] initWithASN1Sequence:algorithmSequence];
+
+    if ((self = [super init])) {
+        _certificate = certificate;
+        _signatureAlgorithm = algorithm;
+        _signatureValue = signatureBitString.value;
+        _data = sequence.data.copy;
     }
     return self;
 }

@@ -10,6 +10,8 @@
 
 #import <STASN1der/STASN1der.h>
 
+#import <CommonCrypto/CommonCrypto.h>
+
 
 typedef NS_ENUM(NSUInteger, STiTunesReceiptValueType) {
     STiTunesReceiptValueTypeBundleId = 2,
@@ -22,7 +24,11 @@ typedef NS_ENUM(NSUInteger, STiTunesReceiptValueType) {
 };
 
 
-@implementation STiTunesAppReceipt
+@implementation STiTunesAppReceipt {
+@private
+    NSData *_opaqueValue;
+    NSData *_sha1Hash;
+}
 
 - (id)init {
     return [self initWithASN1Set:nil];
@@ -33,6 +39,8 @@ typedef NS_ENUM(NSUInteger, STiTunesReceiptValueType) {
     NSString *applicationVersion = nil;
     NSString *originalApplicationVersion = nil;
     NSDate *expirationDate = nil;
+    NSData *opaqueValue = nil;
+    NSData *sha1Hash = nil;
 
     NSMutableArray * const inApp = [[NSMutableArray alloc] init];
 
@@ -58,10 +66,10 @@ typedef NS_ENUM(NSUInteger, STiTunesReceiptValueType) {
         NSData * const valueData = value.content;
         switch ((STiTunesReceiptValueType)type.value) {
             case STiTunesReceiptValueTypeOpaqueValue:
-                NSLog(@"opaqueValue: %@", valueData);
+                opaqueValue = valueData;
                 break;
             case STiTunesReceiptValueTypeSHA1Hash:
-                NSLog(@"sha1Hash: %@", valueData);
+                sha1Hash = valueData;
                 break;
             case STiTunesReceiptValueTypeBundleId: {
                 STASN1derUTF8StringObject * const valueObject = [STASN1derParser objectFromASN1Data:valueData error:NULL];
@@ -106,8 +114,41 @@ typedef NS_ENUM(NSUInteger, STiTunesReceiptValueType) {
         _originalApplicationVersion = originalApplicationVersion.copy;
         _expirationDate = expirationDate.copy;
         _inApp = inApp.copy;
+        _opaqueValue = opaqueValue;
+        _sha1Hash = sha1Hash;
     }
     return self;
+}
+
+- (BOOL)validateWithBundleIdentifier:(NSString *)bundleIdentifier version:(NSString *)version guidData:(NSData *)guidData {
+    if (![_bundleId isEqualToString:bundleIdentifier]) {
+        return NO;
+    }
+    if (![_applicationVersion isEqualToString:version]) {
+        return NO;
+    }
+
+    NSData * const opaqueValue = _opaqueValue;
+    NSData * const sha1Hash = _sha1Hash;
+
+    CC_SHA1_CTX ctx;
+    CC_SHA1_Init(&ctx);
+
+    void const *guidBytes = guidData.bytes;
+    CC_LONG guidLength = (CC_LONG)guidData.length;
+    CC_SHA1_Update(&ctx, guidBytes, guidLength);
+
+    void const *opaqueBytes = opaqueValue.bytes;
+    CC_LONG opaqueLength = (CC_LONG)opaqueValue.length;
+    CC_SHA1_Update(&ctx, opaqueBytes, opaqueLength);
+
+    unsigned char digestBytes[CC_SHA1_DIGEST_LENGTH];
+    CC_SHA1_Final((unsigned char *)&digestBytes, &ctx);
+
+    NSData * const digestData = [[NSData alloc] initWithBytesNoCopy:digestBytes length:CC_SHA1_DIGEST_LENGTH freeWhenDone:NO];
+    BOOL const digestMatches = [digestData isEqualToData:sha1Hash];
+
+    return digestMatches;
 }
 
 @end

@@ -28,12 +28,12 @@ int main(int argc, const char * argv[]) {
         if ([signedContent verifySignature]) {
             STCMSDataContent * const encapsulatedContent = (STCMSDataContent *)((STCMSSignedDataContent *)signedContent).encapsulatedContent;
             STASN1derSetObject * const receiptObjectsSet = [STASN1derParser objectFromASN1Data:encapsulatedContent.content error:NULL];
-            NSLog(@"%@", receiptObjectsSet);
+            STiTunesAppReceipt * const receipt = [[STiTunesAppReceipt alloc] initWithASN1Set:receiptObjectsSet];
+            if (![receipt validateWithBundleIdentifier:@"au.com.fairfaxdigital.SMH-iPad" version:@"2.4.1" guidData:nil]) {
+                NSLog(@"failed validation");
+            }
+            NSLog(@"%@", receipt);
         }
-
-        NSError *error = nil;
-        STiTunesAppReceipt * const receipt = [STiTunesReceiptParser receiptWithData:data error:&error];
-        NSLog(@"%@", receipt);
     }
     return 0;
 }

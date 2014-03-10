@@ -153,12 +153,6 @@ static struct STASN1derIdentifier const STCMSSignedDataCRLsIdentifier = {
     NSMutableArray * const certificateRefs = [[NSMutableArray alloc] initWithCapacity:certificates.count];
     for (STCMSCertificate *certificate in certificates) {
         SecCertificateRef const certRef = SecCertificateCreateWithData(NULL, (__bridge CFDataRef)(certificate.data));
-        CFStringRef cname = nil;
-        OSStatus err = SecCertificateCopyCommonName(certRef, &cname);
-        if (cname) {
-            NSLog(@"%@", cname);
-            CFRelease(cname);
-        }
         if (certRef) {
             [certificateRefs addObject:(__bridge id)(certRef)];
             CFRelease(certRef);
@@ -167,7 +161,7 @@ static struct STASN1derIdentifier const STCMSSignedDataCRLsIdentifier = {
 
 
     SecTrustRef trust = NULL;
-    SecPolicyRef policy = SecPolicyCreateSSL(NO, NULL);
+    SecPolicyRef policy = SecPolicyCreateBasicX509();
     OSStatus rv = SecTrustCreateWithCertificates((__bridge CFTypeRef)(certificateRefs), policy, &trust);
     if (rv != errSecSuccess) {
         return NO;
@@ -190,6 +184,7 @@ static struct STASN1derIdentifier const STCMSSignedDataCRLsIdentifier = {
         case kSecTrustResultOtherError:
             return NO;
         case kSecTrustResultProceed:
+        case kSecTrustResultUnspecified:
         case kSecTrustResultRecoverableTrustFailure:
             break;
     }

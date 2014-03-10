@@ -17,4 +17,5 @@
 @property (nonatomic,copy,readonly) NSString *originalApplicationVersion;
 @property (nonatomic,copy,readonly) NSDate *expirationDate;
 @property (nonatomic,copy,readonly) NSArray *inApp;
+- (BOOL)validateWithBundleIdentifier:(NSString *)bundleIdentifier version:(NSString *)version guidData:(NSData *)guidData;
 @end
