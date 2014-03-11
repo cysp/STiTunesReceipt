@@ -107,6 +107,7 @@
 @property (nonatomic,copy,readonly) NSArray *crls; // STCMSRevocationInfo
 @property (nonatomic,copy,readonly) NSArray *signerInfos; // STCMSSignerInfo
 - (BOOL)verifySignature;
+- (BOOL)verifySignatureWithAnchorCertificateDatas:(NSArray *)anchorCertificateDatas;
 @end
 
 

@@ -65,7 +65,7 @@ static struct STASN1derIdentifier const STCMSSignerInfoUnsignedAttributesIdentif
     }
     ++i;
 
-    STASN1derObject * const sidObject = sequence[i];
+//    STASN1derObject * const sidObject = sequence[i];
     STCMSSignerIdentifier * const signerIdentifier = nil;// [[STCMSSignerIdentifier alloc] initWithASN1Object:sidObject];
 //    if (!signerIdentifier) {
 //        return nil;

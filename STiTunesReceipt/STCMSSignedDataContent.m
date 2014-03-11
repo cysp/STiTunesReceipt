@@ -113,7 +113,7 @@ static struct STASN1derIdentifier const STCMSSignedDataCRLsIdentifier = {
         }
     }
 
-    NSSet *crls = nil;
+//    NSSet *crls = nil;
     {
         STASN1derObject *object = contentSequence[i];
         if (STASN1derIdentifierEqual(STCMSSignedDataCRLsIdentifier, object.identifier)) {
@@ -147,8 +147,11 @@ static struct STASN1derIdentifier const STCMSSignedDataCRLsIdentifier = {
 
 
 - (BOOL)verifySignature {
+    return [self verifySignatureWithAnchorCertificateDatas:nil];
+}
+- (BOOL)verifySignatureWithAnchorCertificateDatas:(NSArray *)anchorCertificateDatas {
     NSArray * const certificates = self.certificates;
-    NSArray * const signerInfos = self.signerInfos;
+//    NSArray * const signerInfos = self.signerInfos;
 
     NSMutableArray * const certificateRefs = [[NSMutableArray alloc] initWithCapacity:certificates.count];
     for (STCMSCertificate *certificate in certificates) {
@@ -162,15 +165,35 @@ static struct STASN1derIdentifier const STCMSSignedDataCRLsIdentifier = {
 
     SecTrustRef trust = NULL;
     SecPolicyRef policy = SecPolicyCreateBasicX509();
-    OSStatus rv = SecTrustCreateWithCertificates((__bridge CFTypeRef)(certificateRefs), policy, &trust);
-    if (rv != errSecSuccess) {
-        return NO;
+    {
+        OSStatus rv = SecTrustCreateWithCertificates((__bridge CFTypeRef)(certificateRefs), policy, &trust);
+        if (rv != errSecSuccess) {
+            return NO;
+        }
+    }
+
+    if (anchorCertificateDatas.count) {
+        NSMutableArray * const anchorCertificates = [[NSMutableArray alloc] initWithCapacity:anchorCertificateDatas.count];
+        for (NSData *anchorCertificateData in anchorCertificateDatas) {
+            SecCertificateRef const certRef = SecCertificateCreateWithData(NULL, (__bridge CFDataRef)(anchorCertificateData));
+            if (!certRef) {
+                return NO;
+            }
+            [anchorCertificates addObject:(__bridge id)(certRef)];
+            CFRelease(certRef);
+        }
+        OSStatus rv = SecTrustSetAnchorCertificates(trust, (__bridge CFArrayRef)(anchorCertificates));
+        if (rv != errSecSuccess) {
+            return NO;
+        }
     }
 
     SecTrustResultType trustResult = kSecTrustResultInvalid;
-    rv = SecTrustEvaluate(trust, &trustResult);
-    if (rv != errSecSuccess) {
-        return NO;
+    {
+        OSStatus rv = SecTrustEvaluate(trust, &trustResult);
+        if (rv != errSecSuccess) {
+            return NO;
+        }
     }
 
     switch (trustResult) {
@@ -180,12 +203,12 @@ static struct STASN1derIdentifier const STCMSSignedDataCRLsIdentifier = {
         case kSecTrustResultConfirm:
 #pragma clang diagnostic pop
         case kSecTrustResultDeny:
+        case kSecTrustResultRecoverableTrustFailure:
         case kSecTrustResultFatalTrustFailure:
         case kSecTrustResultOtherError:
             return NO;
         case kSecTrustResultProceed:
         case kSecTrustResultUnspecified:
-        case kSecTrustResultRecoverableTrustFailure:
             break;
     }
 

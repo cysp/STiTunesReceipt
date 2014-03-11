@@ -16,6 +16,9 @@
 		2C43AA3C18BF68FD008ABECD /* STCMSSignedDataContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C43AA3918BF68FD008ABECD /* STCMSSignedDataContent.m */; };
 		2C43AA4018BF6918008ABECD /* STCMSDataContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C43AA3E18BF6918008ABECD /* STCMSDataContent.m */; };
 		2C43AA4118BF6918008ABECD /* STCMSDataContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C43AA3E18BF6918008ABECD /* STCMSDataContent.m */; };
+		2C9EDE1B18CF0A3500EC5114 /* STAppleRootCertificate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C9EDE1918CF0A3500EC5114 /* STAppleRootCertificate.h */; };
+		2C9EDE1C18CF0A3500EC5114 /* STAppleRootCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9EDE1A18CF0A3500EC5114 /* STAppleRootCertificate.m */; };
+		2C9EDE1D18CF0A3500EC5114 /* STAppleRootCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9EDE1A18CF0A3500EC5114 /* STAppleRootCertificate.m */; };
 		2CD9B51E18BB594400EA8AA1 /* libSTASN1der.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9B51918BB592F00EA8AA1 /* libSTASN1der.a */; };
 		2CD9B56118BB919B00EA8AA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9B56018BB919B00EA8AA1 /* Foundation.framework */; };
 		2CD9B58A18BB91E700EA8AA1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD9B58918BB91E700EA8AA1 /* Cocoa.framework */; };
@@ -110,6 +113,8 @@
 		2C43AA3718BF63FB008ABECD /* STCMS+Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "STCMS+Internal.h"; sourceTree = "<group>"; };
 		2C43AA3918BF68FD008ABECD /* STCMSSignedDataContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCMSSignedDataContent.m; sourceTree = "<group>"; };
 		2C43AA3E18BF6918008ABECD /* STCMSDataContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STCMSDataContent.m; sourceTree = "<group>"; };
+		2C9EDE1918CF0A3500EC5114 /* STAppleRootCertificate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STAppleRootCertificate.h; sourceTree = "<group>"; };
+		2C9EDE1A18CF0A3500EC5114 /* STAppleRootCertificate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STAppleRootCertificate.m; sourceTree = "<group>"; };
 		2CD9B4FB18BB57ED00EA8AA1 /* STiTunesReceipt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = STiTunesReceipt; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CD9B50D18BB592F00EA8AA1 /* STASN1der.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = STASN1der.xcodeproj; path = STASN1der/STASN1der.xcodeproj; sourceTree = "<group>"; };
 		2CD9B52418BB68D200EA8AA1 /* STiTunesReceiptParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STiTunesReceiptParser.h; sourceTree = "<group>"; };
@@ -196,6 +201,8 @@
 				2CD9B52418BB68D200EA8AA1 /* STiTunesReceiptParser.h */,
 				2CD9B5B918BB979600EA8AA1 /* STiTunesReceiptParser+Internal.h */,
 				2CD9B52518BB68D200EA8AA1 /* STiTunesReceiptParser.m */,
+				2C9EDE1918CF0A3500EC5114 /* STAppleRootCertificate.h */,
+				2C9EDE1A18CF0A3500EC5114 /* STAppleRootCertificate.m */,
 				2C43AA2D18BDDDE7008ABECD /* STCMS.h */,
 				2C43AA3718BF63FB008ABECD /* STCMS+Internal.h */,
 				2C43AA2E18BDDDE7008ABECD /* STCMS.m */,
@@ -270,6 +277,7 @@
 				2CE8682618C3255900F9C75E /* STCMSCertificate.h in Headers */,
 				2CE8682118C3001300F9C75E /* STCMSAlgorithmIdentifier.h in Headers */,
 				2C43AA2F18BDDDE7008ABECD /* STCMS.h in Headers */,
+				2C9EDE1B18CF0A3500EC5114 /* STAppleRootCertificate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +419,7 @@
 				2CD9B5B518BB94B800EA8AA1 /* STiTunesReceiptParser.m in Sources */,
 				2CE8682718C3255900F9C75E /* STCMSCertificate.m in Sources */,
 				2CD9B5B318BB94B800EA8AA1 /* STiTunesAppReceipt.m in Sources */,
+				2C9EDE1C18CF0A3500EC5114 /* STAppleRootCertificate.m in Sources */,
 				2C43AA3518BF639F008ABECD /* STCMSContent.m in Sources */,
 				2C43AA4018BF6918008ABECD /* STCMSDataContent.m in Sources */,
 				2CE8682218C3001300F9C75E /* STCMSAlgorithmIdentifier.m in Sources */,
@@ -428,6 +437,7 @@
 				2CD9B5B218BB94B800EA8AA1 /* STiTunesReceiptParser.m in Sources */,
 				2CE8682818C3255900F9C75E /* STCMSCertificate.m in Sources */,
 				2CD9B5B018BB94B800EA8AA1 /* STiTunesAppReceipt.m in Sources */,
+				2C9EDE1D18CF0A3500EC5114 /* STAppleRootCertificate.m in Sources */,
 				2C43AA3618BF639F008ABECD /* STCMSContent.m in Sources */,
 				2C43AA4118BF6918008ABECD /* STCMSDataContent.m in Sources */,
 				2CE8682318C3001300F9C75E /* STCMSAlgorithmIdentifier.m in Sources */,

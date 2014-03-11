@@ -199,6 +199,9 @@ static STCMSAlgorithmIdentifierPlaceholder *gSTCMSAlgorithmIdentifierPlaceholder
     } while (0);
 
     if ((self = [super initWithASN1Sequence:sequence])) {
+        _p = p.value;
+        _q = q.value;
+        _g = g.value;
     }
     return self;
 }

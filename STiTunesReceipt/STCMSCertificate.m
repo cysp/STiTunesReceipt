@@ -116,6 +116,7 @@ static struct STASN1derIdentifier const STTBSCertificateExtensionsIdentifier = {
         STASN1derObject *object = sequence[i];
     }
     if ((self = [super init])) {
+        _version = version;
     }
     return self;
 }

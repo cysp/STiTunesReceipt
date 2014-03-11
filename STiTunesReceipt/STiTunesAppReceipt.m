@@ -134,18 +134,23 @@ typedef NS_ENUM(NSUInteger, STiTunesReceiptValueType) {
     CC_SHA1_CTX ctx;
     CC_SHA1_Init(&ctx);
 
-    void const *guidBytes = guidData.bytes;
+    void const * guidBytes = guidData.bytes;
     CC_LONG guidLength = (CC_LONG)guidData.length;
     CC_SHA1_Update(&ctx, guidBytes, guidLength);
 
-    void const *opaqueBytes = opaqueValue.bytes;
+    void const * opaqueBytes = opaqueValue.bytes;
     CC_LONG opaqueLength = (CC_LONG)opaqueValue.length;
     CC_SHA1_Update(&ctx, opaqueBytes, opaqueLength);
+
+    NSData * const bundleIdentifierData = [bundleIdentifier dataUsingEncoding:NSUTF8StringEncoding];
+    void const * bundleIdentifierBytes = bundleIdentifierData.bytes;
+    CC_LONG bundleIdentifierLength = (CC_LONG)bundleIdentifierData.length;
+    CC_SHA1_Update(&ctx, bundleIdentifierBytes, bundleIdentifierLength);
 
     unsigned char digestBytes[CC_SHA1_DIGEST_LENGTH];
     CC_SHA1_Final((unsigned char *)&digestBytes, &ctx);
 
-    NSData * const digestData = [[NSData alloc] initWithBytesNoCopy:digestBytes length:CC_SHA1_DIGEST_LENGTH freeWhenDone:NO];
+    NSData * const digestData = [[NSData alloc] initWithBytes:digestBytes length:CC_SHA1_DIGEST_LENGTH];
     BOOL const digestMatches = [digestData isEqualToData:sha1Hash];
 
     return digestMatches;
