@@ -14,14 +14,30 @@
 
 
 typedef NS_ENUM(NSUInteger, STiTunesReceiptValueType) {
+    STiTunesReceiptValueTypeEnvironment = 0,
+    STiTunesReceiptValueTypeAppleId = 1,
     STiTunesReceiptValueTypeBundleId = 2,
     STiTunesReceiptValueTypeApplicationVersion = 3,
     STiTunesReceiptValueTypeOpaqueValue = 4,
     STiTunesReceiptValueTypeSHA1Hash = 5,
+    STiTunesReceiptValueTypeContentAdvisoryRating = 10,
+    STiTunesReceiptValueTypeDownloadId = 15,
     STiTunesReceiptValueTypeInAppPurchaseReceipt = 17,
+    STiTunesReceiptValueTypeOriginalPurchaseDate = 18,
     STiTunesReceiptValueTypeOriginalApplicationVersion = 19,
     STiTunesReceiptValueTypeExpirationDate = 21,
 };
+
+
+static enum STiTunesAppReceiptEnvironment STiTunesAppReceiptEnvironmentFromString(NSString *string) {
+    if ([@"Production" isEqualToString:string]) {
+        return STiTunesAppReceiptEnvironmentProduction;
+    }
+    if ([@"Sandbox" isEqualToString:string]) {
+        return STiTunesAppReceiptEnvironmentSandbox;
+    }
+    return 0;
+}
 
 
 @implementation STiTunesAppReceipt {
@@ -35,7 +51,10 @@ typedef NS_ENUM(NSUInteger, STiTunesReceiptValueType) {
 }
 
 - (id)initWithASN1Set:(STASN1derSetObject *)set {
+    NSString *environment = nil;
+    NSUInteger appleId = 0;
     NSString *bundleId = nil;
+    NSData *bundleIdData = nil;
     NSString *applicationVersion = nil;
     NSString *originalApplicationVersion = nil;
     NSDate *expirationDate = nil;
@@ -65,13 +84,16 @@ typedef NS_ENUM(NSUInteger, STiTunesReceiptValueType) {
         }
         NSData * const valueData = value.content;
         switch ((STiTunesReceiptValueType)type.value) {
-            case STiTunesReceiptValueTypeOpaqueValue:
-                opaqueValue = valueData;
-                break;
-            case STiTunesReceiptValueTypeSHA1Hash:
-                sha1Hash = valueData;
-                break;
+            case STiTunesReceiptValueTypeEnvironment: {
+                STASN1derUTF8StringObject * const valueObject = [STASN1derParser objectFromASN1Data:valueData error:NULL];
+                environment = valueObject.value;
+            } break;
+            case STiTunesReceiptValueTypeAppleId: {
+                STASN1derIntegerObject * const valueObject = [STASN1derParser objectFromASN1Data:valueData error:NULL];
+                appleId = valueObject.value;
+            } break;
             case STiTunesReceiptValueTypeBundleId: {
+                bundleIdData = valueData;
                 STASN1derUTF8StringObject * const valueObject = [STASN1derParser objectFromASN1Data:valueData error:NULL];
                 bundleId = valueObject.value;
             } break;
@@ -79,14 +101,16 @@ typedef NS_ENUM(NSUInteger, STiTunesReceiptValueType) {
                 STASN1derUTF8StringObject * const valueObject = [STASN1derParser objectFromASN1Data:valueData error:NULL];
                 applicationVersion = valueObject.value;
             } break;
-            case STiTunesReceiptValueTypeOriginalApplicationVersion: {
-                STASN1derUTF8StringObject * const valueObject = [STASN1derParser objectFromASN1Data:valueData error:NULL];
-                originalApplicationVersion = valueObject.value;
-            } break;
-            case STiTunesReceiptValueTypeExpirationDate: {
-                STASN1derUTF8StringObject * const dateString = [STASN1derParser objectFromASN1Data:valueData error:NULL];
-                expirationDate = [STiTunesReceiptParser st_dateForString:dateString.value];
-            } break;
+            case STiTunesReceiptValueTypeOpaqueValue:
+                opaqueValue = valueData;
+                break;
+            case STiTunesReceiptValueTypeSHA1Hash:
+                sha1Hash = valueData;
+                break;
+            case STiTunesReceiptValueTypeContentAdvisoryRating:
+                break;
+            case STiTunesReceiptValueTypeDownloadId:
+                break;
             case STiTunesReceiptValueTypeInAppPurchaseReceipt: {
                 NSArray * const valueObjects = [STASN1derParser objectsFromASN1Data:valueData error:NULL];
                 if (valueObjects.count != 1) {
@@ -102,6 +126,21 @@ typedef NS_ENUM(NSUInteger, STiTunesReceiptValueType) {
                     [inApp addObject:inAppReceipt];
                 }
             } break;
+            case STiTunesReceiptValueTypeOriginalPurchaseDate:
+                break;
+            case STiTunesReceiptValueTypeOriginalApplicationVersion: {
+                STASN1derUTF8StringObject * const valueObject = [STASN1derParser objectFromASN1Data:valueData error:NULL];
+                originalApplicationVersion = valueObject.value;
+            } break;
+            case STiTunesReceiptValueTypeExpirationDate: {
+                STASN1derUTF8StringObject * const dateString = [STASN1derParser objectFromASN1Data:valueData error:NULL];
+                expirationDate = [STiTunesReceiptParser st_dateForString:dateString.value];
+            } break;
+//            default: {
+//                STASN1derUTF8StringObject * const valueObject = [STASN1derParser objectFromASN1Data:valueData error:NULL];
+//                NSLog(@"unknown receipt field: %lld %@", type.value, valueData);
+//                NSLog(@"    %@", [valueObject debugDescription]);
+//            } break;
         }
     }
 
@@ -109,7 +148,10 @@ typedef NS_ENUM(NSUInteger, STiTunesReceiptValueType) {
         return nil;
     }
     if ((self = [super init])) {
+        _environment = STiTunesAppReceiptEnvironmentFromString(environment);
+        _appleId = appleId;
         _bundleId = bundleId.copy;
+        _bundleIdData = bundleIdData.copy;
         _applicationVersion = applicationVersion.copy;
         _originalApplicationVersion = originalApplicationVersion.copy;
         _expirationDate = expirationDate.copy;
@@ -128,10 +170,11 @@ typedef NS_ENUM(NSUInteger, STiTunesReceiptValueType) {
         return NO;
     }
 
+    NSData * const bundleIdData = _bundleIdData;
     NSData * const opaqueValue = _opaqueValue;
     NSData * const sha1Hash = _sha1Hash;
 
-    CC_SHA1_CTX ctx;
+    CC_SHA1_CTX ctx = { 0 };
     CC_SHA1_Init(&ctx);
 
     void const * guidBytes = guidData.bytes;
@@ -142,12 +185,11 @@ typedef NS_ENUM(NSUInteger, STiTunesReceiptValueType) {
     CC_LONG opaqueLength = (CC_LONG)opaqueValue.length;
     CC_SHA1_Update(&ctx, opaqueBytes, opaqueLength);
 
-    NSData * const bundleIdentifierData = [bundleIdentifier dataUsingEncoding:NSUTF8StringEncoding];
-    void const * bundleIdentifierBytes = bundleIdentifierData.bytes;
-    CC_LONG bundleIdentifierLength = (CC_LONG)bundleIdentifierData.length;
-    CC_SHA1_Update(&ctx, bundleIdentifierBytes, bundleIdentifierLength);
+    void const * bundleIdBytes = bundleIdData.bytes;
+    CC_LONG bundleIdLength = (CC_LONG)bundleIdData.length;
+    CC_SHA1_Update(&ctx, bundleIdBytes, bundleIdLength);
 
-    unsigned char digestBytes[CC_SHA1_DIGEST_LENGTH];
+    unsigned char digestBytes[CC_SHA1_DIGEST_LENGTH] = { 0 };
     CC_SHA1_Final((unsigned char *)&digestBytes, &ctx);
 
     NSData * const digestData = [[NSData alloc] initWithBytes:digestBytes length:CC_SHA1_DIGEST_LENGTH];

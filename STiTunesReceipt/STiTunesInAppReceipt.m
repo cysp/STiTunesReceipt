@@ -108,6 +108,11 @@ typedef NS_ENUM(NSUInteger, STiTunesInAppReceiptValueType) {
                 STASN1derIA5StringObject * const cancellationDateStringObject = [STASN1derParser objectFromASN1Data:fieldValueData error:NULL];
                 cancellationDate = [STiTunesReceiptParser st_dateForString:cancellationDateStringObject.value];
             } break;
+//            default: {
+//                STASN1derUTF8StringObject * const valueObject = [STASN1derParser objectFromASN1Data:fieldValueData error:NULL];
+//                NSLog(@"unknown iareceipt field: %lld %@", type.value, fieldValueData);
+//                NSLog(@"    %@", [valueObject debugDescription]);
+//            } break;
         }
     }
 

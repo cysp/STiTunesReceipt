@@ -10,9 +10,18 @@
 @class STASN1derSetObject;
 
 
+NS_ENUM(NSInteger, STiTunesAppReceiptEnvironment) {
+    STiTunesAppReceiptEnvironmentProduction = 1,
+    STiTunesAppReceiptEnvironmentSandbox = 2,
+};
+
+
 @interface STiTunesAppReceipt : NSObject
 - (id)initWithASN1Set:(STASN1derSetObject *)set;
+@property (nonatomic,assign,readonly) enum STiTunesAppReceiptEnvironment environment;
+@property (nonatomic,assign,readonly) NSUInteger appleId;
 @property (nonatomic,copy,readonly) NSString *bundleId;
+@property (nonatomic,copy,readonly) NSData *bundleIdData;
 @property (nonatomic,copy,readonly) NSString *applicationVersion;
 @property (nonatomic,copy,readonly) NSString *originalApplicationVersion;
 @property (nonatomic,copy,readonly) NSDate *expirationDate;
